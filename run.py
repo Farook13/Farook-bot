@@ -11,4 +11,3 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Failed to start bot: {str(e)}")
     logger.info("Bot stopped.")
-​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
