@@ -18,15 +18,6 @@ MONGO_URI = os.getenv('mongodb+srv://saidalimuhamed88:iladias2025@cluster0.qt4dv
 OMDB_API_KEY = os.getenv('OMDB_API_KEY')
 
 # Check for missing credentials
-missing_vars = []
-for var, value in [("API_ID", API_ID), ("API_HASH", API_HASH), ("BOT_TOKEN", BOT_TOKEN), 
-                   ("MONGO_URI", MONGO_URI), ("OMDB_API_KEY", OMDB_API_KEY)]:
-    if not value:
-        missing_vars.append(var)
-
-if missing_vars:
-    logger.error(f"Missing environment variables: {', '.join(missing_vars)}. Please set them in Koyeb or .env.")
-    raise ValueError(f"Missing environment variables: {', '.join(missing_vars)}")
 
 # Initialize Pyrogram client
 app = Client(
