@@ -6,6 +6,6 @@ from bot import app
 load_dotenv()
 
 if __name__ == "__main__":
-    print("Bot is running...")
+    print("Bot starting...")
     app.run()
-​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
