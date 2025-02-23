@@ -35,4 +35,3 @@ async def filter_movie(client, message: Message):
 @app.on_message(filters.private)
 async def error_handler(client, message: Message):
     logger.warning(f"Message error: {message.text}")
-​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
