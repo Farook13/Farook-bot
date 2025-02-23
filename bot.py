@@ -1,30 +1,21 @@
 import logging
-from pyrogram import Client, filters
+from pyrogram import filters
 from pyrogram.types import Message
+from info import app  # Import app from info.py
 from utils import get_movie_details, get_movie_file
-import os # Added this line
 
 # Minimal logging for performance
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-# Initialize Pyrogram client
-app = Client(
-    "movie_bot",
-    api_id=os.getenv('12618934'),
-    api_hash=os.getenv('49aacd0bc2f8924add29fb02e20c8a16'),
-    bot_token=os.getenv('7857321740:AAEtcoE9BbLGCaF5TlkeGvhLZpXU36vco8E')
-)
-
-# Start command - lightweight response
 @app.on_message(filters.command("start") & filters.private)
 async def start(client, message: Message):
+    logger.info(f"Received /start from {message.from_user.id}")
     await message.reply_text("Welcome! Send a movie name for details and file.")
 
-# Handle movie search with fast response (fixed filter syntax)
-@app.on_message(filters.text & filters.private & ~filters.command("start")) # Changed this line
+@app.on_message(filters.text & filters.private & ~filters.command("start"))
 async def filter_movie(client, message: Message):
     movie_name = message.text.lower().strip()
+    logger.info(f"Processing movie request: {movie_name}")
     imdb_info = await get_movie_details(movie_name)
     response_text = (
         f"**{imdb_info['title']} ({imdb_info['year']})**\n{imdb_info['plot']}"
@@ -41,7 +32,7 @@ async def filter_movie(client, message: Message):
     else:
         await message.reply_text(f"{response_text}\nNo file found.", parse_mode="markdown")
 
-# Minimal error handler
 @app.on_message(filters.private)
 async def error_handler(client, message: Message):
     logger.warning(f"Message error: {message.text}")
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
