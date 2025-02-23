@@ -1,10 +1,14 @@
-import os
-from dotenv import load_dotenv
-from bot import app
+import logging
+from info import app
 
-# Load environment variables
-load_dotenv()
+# Configure logging
+logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
-    print("Bot starting...")
-    app.run()
+    logger.info("Bot starting...")
+    try:
+        app.run()  # Start the bot defined in info.py
+    except Exception as e:
+        logger.error(f"Failed to start bot: {str(e)}")
+    logger.info("Bot stopped.")
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
