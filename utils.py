@@ -5,14 +5,13 @@ import gridfs
 from io import BytesIO
 import requests
 import os
-from functools import lru_cache
 
 # Persistent MongoDB client with connection pooling
 client = MongoClient(os.getenv('MONGO_URI'), maxPoolSize=50)
 db = client['movie_bot']
 fs = gridfs.GridFS(db)
 movies_collection = db['movies']
-cache_collection = db['imdb_cache']  # New collection for caching IMDb data
+cache_collection = db['imdb_cache']  # Cache for IMDb data
 
 # OMDb API settings
 OMDB_API_KEY = os.getenv('OMDB_API_KEY')
@@ -28,12 +27,10 @@ async def fetch_imdb_data(movie_name):
 
 # Cached movie details with MongoDB
 async def get_movie_details(movie_name):
-    # Check cache first
     cached = cache_collection.find_one({"movie_name": movie_name})
     if cached and 'data' in cached:
         return cached['data']
 
-    # Fetch from IMDb if not cached
     data = await fetch_imdb_data(movie_name)
     if data:
         result = {
@@ -42,7 +39,6 @@ async def get_movie_details(movie_name):
             'plot': data.get('Plot'),
             'poster': data.get('Poster')
         }
-        # Cache the result
         cache_collection.update_one(
             {"movie_name": movie_name},
             {"$set": {"data": result}},
@@ -60,4 +56,4 @@ async def get_movie_file(movie_name):
         file_stream.name = movie.get('filename', f"{movie['title']}.mp4")
         return file_stream, movie['title']
     return None, None
-​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
