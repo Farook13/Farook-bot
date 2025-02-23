@@ -46,4 +46,3 @@ logger.info(f"OMDB_API_KEY: {OMDB_API_KEY[:4]}... (masked)")
 
 # Import bot handlers
 from bot import *
-​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
