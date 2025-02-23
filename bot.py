@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 # Initialize Pyrogram client
 app = Client(
     "movie_bot",
-    api_id=os.getenv('API_ID'),
-    api_hash=os.getenv('API_HASH'),
-    bot_token=os.getenv('BOT_TOKEN')
+    api_id=os.getenv('12618934'),
+    api_hash=os.getenv('49aacd0bc2f8924add29fb02e20c8a16'),
+    bot_token=os.getenv('7857321740:AAEtcoE9BbLGCaF5TlkeGvhLZpXU36vco8E')
 )
 
 # Start command - lightweight response
