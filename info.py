@@ -29,11 +29,6 @@ app = Client(
 
 # Log startup info safely
 logger.info("Initializing bot...")
-logger.info(f"API_ID: {API_ID[:4]}... (masked)")
-logger.info(f"API_HASH: {API_HASH[:4]}... (masked)")
-logger.info(f"BOT_TOKEN: {BOT_TOKEN[:4]}... (masked)")
-logger.info(f"MONGO_URI: {MONGO_URI[:10]}... (masked)")
-logger.info(f"OMDB_API_KEY: {OMDB_API_KEY[:4]}... (masked)")
 
 # Import bot handlers
 from bot import *
